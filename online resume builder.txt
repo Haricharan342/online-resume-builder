@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Resume Builder</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+            width: 90%;
+            max-width: 1000px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-section {
+            width: 40%;
+            padding: 20px;
+        }
+
+        .form-section h2 {
+            color: #0077ff;
+            margin-bottom: 10px;
+        }
+
+        .form-section input, .form-section textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background: #0077ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #005bb5;
+        }
+
+        .resume-section {
+            width: 60%;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .resume-section h2 {
+            text-align: center;
+            color: #333;
+            border-bottom: 2px solid #0077ff;
+            padding-bottom: 10px;
+        }
+
+        .resume-content {
+            padding: 10px;
+        }
+
+        .resume-content p {
+            margin: 5px 0;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="form-section">
+            <h2>Enter Your Details</h2>
+            <input type="text" id="name" placeholder="Your Name" oninput="updatePreview()">
+            <input type="text" id="email" placeholder="Your Email" oninput="updatePreview()">
+            <input type="text" id="phone" placeholder="Your Phone" oninput="updatePreview()">
+            <textarea id="skills" placeholder="Your Skills (comma separated)" oninput="updatePreview()"></textarea>
+            <textarea id="experience" placeholder="Your Experience" oninput="updatePreview()"></textarea>
+            <button onclick="downloadPDF()">Download as PDF</button>
+        </div>
+
+        <div class="resume-section" id="resume">
+            <h2>Resume Preview</h2>
+            <div class="resume-content">
+                <p><strong>Name:</strong> <span id="preview-name">[Your Name]</span></p>
+                <p><strong>Email:</strong> <span id="preview-email">[Your Email]</span></p>
+                <p><strong>Phone:</strong> <span id="preview-phone">[Your Phone]</span></p>
+                <p><strong>Skills:</strong> <span id="preview-skills">[Your Skills]</span></p>
+                <p><strong>Experience:</strong> <span id="preview-experience">[Your Experience]</span></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updatePreview() {
+            document.getElementById("preview-name").innerText = document.getElementById("name").value || "[Your Name]";
+            document.getElementById("preview-email").innerText = document.getElementById("email").value || "[Your Email]";
+            document.getElementById("preview-phone").innerText = document.getElementById("phone").value || "[Your Phone]";
+            document.getElementById("preview-skills").innerText = document.getElementById("skills").value || "[Your Skills]";
+            document.getElementById("preview-experience").innerText = document.getElementById("experience").value || "[Your Experience]";
+        }
+
+        function downloadPDF() {
+            const element = document.getElementById("resume");
+            html2pdf(element);
+        }
+    </script>
+
+</body>
+</html>
